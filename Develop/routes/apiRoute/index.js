@@ -5,15 +5,15 @@ const path = require('path');
 const uuid = require('../../helpers/uudi');
 
 const getNotes = () => {
-    return readFile('../db/db.json', 'utf-8')
+    return fs.readFile('../db/db.json')
       .then(rawNotes => [].concat(JSON.parse(rawNotes)));
 }
 
-router.get('/notes', (req, res) => {
+router.get('/api', (req, res) => {
     getNotes().then(notes => res.JSON(notes));
 })
 
-router.post('/notes', (req, res) => {
+router.post('/', (req, res) => {
     getNotes().then(notes => {
         let notesArr = notes;
         const { title, text } = req.body;
@@ -35,5 +35,3 @@ router.post('/notes', (req, res) => {
             res.redirect('back');
     });
 })
-
-module.exports = router;
