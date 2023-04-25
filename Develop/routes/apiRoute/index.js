@@ -9,11 +9,11 @@ const getNotes = () => {
       .then(rawNotes => [].concat(JSON.parse(rawNotes)));
 }
 
-router.get('/notes', (req, res) => {
+router.get('/api/notes', (req, res) => {
     getNotes().then(notes => res.JSON(notes));
 })
 
-router.post('/notes', (req, res) => {
+router.post('/api/notes', (req, res) => {
     getNotes().then(notes => {
         let notesArr = notes;
         const { title, text } = req.body;
